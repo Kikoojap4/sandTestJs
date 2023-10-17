@@ -29,23 +29,18 @@ function setup() {
     for(let i = 0; i < grid.length; i++){
         for(let j = 0; j < grid[i].length; j++){
             if(grid[i][j] == 1){
-                refreshGrid(i,j);
+                gravityGrid(i,j);
             }
         }
     }
   } 
 
 
-  function refreshGrid(x,y){
+  function gravityGrid(x,y){
         if(grid[x][y+1]==0){
             grid[x][y+1]=1;
             grid[x][y]=0;
         }
-        if(grid[x][y+1]==1 && grid[x-1][y+1]==0 ){
-            grid[x+1][y+1]=1;
-            grid[x][y]=0;
-        }
-        
   }
 
 
