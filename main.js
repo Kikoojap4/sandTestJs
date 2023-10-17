@@ -17,12 +17,9 @@ function setup() {
             }
         }
     }
-    frameRate(10);
+    frameRate(5);
 
-    /* remplir uniquement la première ligne de la grid*/
-    for(let i = 0; i < grid.length; i++){
-        grid[i][0] = 1;
-    }
+
     
 }
   
@@ -42,6 +39,10 @@ function setup() {
   function refreshGrid(x,y){
         if(grid[x][y+1]==0){
             grid[x][y+1]=1;
+            grid[x][y]=0;
+        }
+        if(grid[x][y+1]==1 && grid[x-1][y+1]==0 ){
+            grid[x+1][y+1]=1;
             grid[x][y]=0;
         }
         
