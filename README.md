@@ -4,7 +4,7 @@
 
 I've made a tiny project, for making litteraly a sandbox. Dot represents sand, and there is gravity a there is some bugs. I juststarted JS with this project with the library p5.js.
 
-I stop this project because some of the bugs are *(for me)* to hard to fix.
+I stop this project because some of the bugs are *(for me)* to hard to fix. (need to refactor the code & to lazy for this)
 
 This project has started with this tweet of a sand simulation : [here](https://twitter.com/matthen2/status/1712943867765383371?s=46) ,and I started to recreate the video
 
