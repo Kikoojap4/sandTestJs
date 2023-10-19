@@ -24,5 +24,5 @@ The code is very simple to understand.
 The code is not perfect, but it's a good start for me.
 You can do whatever with the code, this is not even a big code so I don't care if you not credit me.
 
-[Kikoojap4](github.com/kikoojap4) & my [friend](github.com/chevalmonsieur)
+[Kikoojap4](https://github.com/kikoojap4) & my [friend](https://github.com/chevalmonsieur)
 
