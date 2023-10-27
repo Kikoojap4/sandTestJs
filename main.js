@@ -5,13 +5,15 @@ let x = 0
 let y = 0
 let x2 = 0
 let y2 = 0
+let clignotement = false
+
 
 function setup() {
     
-    createCanvas(1440, 798);
+    createCanvas(innerWidth-20, innerHeight-50);
     /* faire une boucle pour remplir la variable grid avec des O et aléatoirement mettre un 1*/
     makeAGrid();
-    frameRate(500);
+    frameRate(2);
 
 
     
@@ -29,13 +31,28 @@ function setup() {
     makeAK(15,7)
     makeAO(24,7)
     makeAO(33,7)
-    //makeACube(46,7,2)
+    makeAJ(46,7)
+    makeAA(50,7)
+    makeAP(60,7)
+    
     
     }
+    function makeAP(debutX,debutY){
+        makeALine(debutX,debutY,2,20)
+        makeALine(debutX+2,debutY,5,2)
+        makeALine(debutX+2,debutY+8,5,2)
+        makeALine(debutX+5,debutY+2,2,6)
+    }
+    function makeAA(debutX,debutY){
+        makeALine(debutX,debutY,2,20)
+        makeALine(debutX+2,debutY,6,2)
+        makeALine(debutX+6,debutY+2,2,18)
+        makeALine(debutX+2,debutY+9,4,2)
+    }
     function makeAJ(debutX, debutY){
-        makeALine(46,7,2,20)
-        makeALine(42,25,4,2)
-        makeACube(42,23,2)
+        makeALine(debutX,debutY,2,20)
+        makeALine(debutX-4,debutY+18,4,2)
+        makeACube(debutX-4,debutY+16,2)
     }
     function makeAO(debutX,debutY){
         makeALine(debutX,debutY,2,20)
@@ -78,6 +95,9 @@ function setup() {
 
     }
 
+    function clignottement(){
+        clignotement = !clignotement;
+    }
   function draw() {
     if(x2 > 99){
         x2 = 0;
@@ -152,13 +172,34 @@ function setup() {
     /* dessiner une grille en fonction de la variable grid */
     mainWidth = width / grid.length;
     mainHeight = height / grid[0].length;
-
+    noStroke();
     for(let i = 0; i < grid.length; i++){
         for(let j = 0; j < grid[i].length; j++){
             if(grid[i][j] == true){
-                fill(255);
+                if(clignotement == true){
+                    if(frameCount%2 == 0){
+                        fill(255);
+                    } else {
+                        fill(0);
+                    }
+                } else {
+                    fill(255);
+                }
+                
             } else {
-                fill(0);
+                if(clignotement == true){
+                    if(frameCount%2 == 0){
+                        fill(0);
+                    }
+                    else{
+                        fill(255);
+                    }
+                }
+                else{
+                    fill(0);
+                }
+                
+                
             }
             rect(i * mainWidth, j * mainHeight, mainWidth, mainHeight);
         }
@@ -184,6 +225,7 @@ function setup() {
 
     function refresh(){
         makeAGrid();
+        clignotement = false
 
     }
 
