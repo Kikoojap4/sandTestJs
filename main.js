@@ -6,36 +6,30 @@ let y = 0
 let x2 = 0
 let y2 = 0
 let clignotement = false
-
+let sideScrolls = false
 
 function setup() {
     
     createCanvas(innerWidth-20, innerHeight-50);
     /* faire une boucle pour remplir la variable grid avec des O et aléatoirement mettre un 1*/
     makeAGrid();
-    frameRate(2);
-
-
+    frameRate(30);
     
     }
+
     function makeAGrid(){
     grid = []
-    for(let i = 0; i < 75; i++){
+    for(let i = 0; i < 100; i++){
         grid.push([]);
-        for(let j = 0; j < 37; j++){
+        for(let j = 0; j < 45; j++){
             grid[i][j] = true;
         }
     }
-    makeAK(2,7)
-    makeAI(11,7)
-    makeAK(15,7)
-    makeAO(24,7)
-    makeAO(33,7)
-    makeAJ(46,7)
-    makeAA(50,7)
-    makeAP(60,7)
-    
-    
+}
+    function littleAnimation(){
+        for(let i = 0; i < 100; i+=2){
+            grid[i][i] = !grid[i][i]
+        }
     }
     function makeAP(debutX,debutY){
         makeALine(debutX,debutY,2,20)
@@ -99,13 +93,7 @@ function setup() {
         clignotement = !clignotement;
     }
   function draw() {
-    if(x2 > 99){
-        x2 = 0;
-        y2 += 1;
-    }
-    if(y2 > 49){
-        y2 = 0;
-    }
+    
     x = floor(mouseX / mainWidth);
     y = floor(mouseY / mainHeight);
     background(1);
@@ -113,61 +101,44 @@ function setup() {
 
     fill(255,0,0)
     text(x+' '+y, 10, 10)
-    //grid[x2][y2] = !grid[x2][y2] ;
-    x2 += 1;
-    // offsetI = frameCount % 2
-    // offsetJ = int(frameCount% 4/2 )
-    // for (let i = 0; i < grid.length; i ++) {
-    //     for (let j = frameCount%2; j < grid[i].length; j +=2) {
-    //         if (grid[i][j] == true) {
-    //             gravityGrid(i, j);
+
+    if(sideScrolls == true){
+        if(x2 > 99){
+            x2 = 0;
+            y2 += 1;
+        }
+        if(y2 > 44){
+            y2 = 0;
+        }
+        grid[x2][y2] = !grid[x2][y2] ;
+        x2 += 1;
+    }
+    // if(true){
+    //     grid[x2][y2] = !grid[x2][y2] ;
+    //     x2 += 2;
+    //     while(x2 < 100 & x2 > 0){
+    //         while(y2 < 45){
+    //             grid[x2][y2] = !grid[x2][y2] ;
+    //             y2 += 1;
+    //             x2 += 1;
     //         }
     //     }
     // }
+    
+
   } 
 
 
-
-
-//   function gravityGrid(x,y){
-//     if (x == grid.length - 1 || y == grid[x].length - 1) {
-//         return;
-//     }
-//     tab = [grid[x][y], grid[x + 1][y], grid[x][y + 1], grid[x + 1][y + 1]];
-//     if (!tab[0] && tab[1] && !tab[2] && !tab[3]) {
-//         grid[x+1][y] = false
-//         grid[x+1][y+1] = true
-//     } else if (tab[0] && !tab[1] && !tab[2] && !tab[3]) {
-//         grid[x][y] = false
-//         grid[x][y+1] = true
-//     } else if (!tab[0] && tab[1] && !tab[2] && tab[3]) {
-//         grid[x+1][y] = false
-//         grid[x][y+1] = true
-//     } else if (tab[0] && !tab[1] && tab[2] && !tab[3]) {
-//         grid[x][y] = false
-//         grid[x+1][y+1] = true
-//     } else if (!tab[0] && tab[1] && tab[2] && !tab[3]) {
-//         grid[x+1][y] = false
-//         grid[x+1][y+1] = true
-//     } else if (tab[0] && !tab[1] && !tab[2] && tab[3]) {
-//         grid[x][y] = false
-//         grid[x][y+1] = true
-//     } else if (tab[0] && tab[1] && !tab[2] && !tab[3]) {
-//         grid[x][y] = false
-//         grid[x+1][y] = false
-//         grid[x][y+1] = true
-//         grid[x+1][y+1] = true
-//     } else if (tab[0] && tab[1] && !tab[2] && tab[3]) {
-//         grid[x][y] = false
-//         grid[x][y+1] = true
-//     } else if (tab[0] && tab[1] && tab[2] && !tab[3]) {
-//         grid[x+1][y] = false
-//         grid[x+1][y+1] = true
-//     }
-
-//   }
-
-
+  function drawKikoojap(){
+    makeAK(2,7)
+    makeAI(11,7)
+    makeAK(15,7)
+    makeAO(24,7)
+    makeAO(33,7)
+    makeAJ(46,7)
+    makeAA(50,7)
+    makeAP(60,7)
+  }
   function drawAGrid(){
     /* dessiner une grille en fonction de la variable grid */
     mainWidth = width / grid.length;
@@ -211,6 +182,17 @@ function setup() {
     // remplir la grid de true
     
   }
+  function invertAll(){
+    for(let i = 0; i < grid.length; i++){
+        for(let j = 0; j < grid[i].length; j++){
+            grid[i][j] = !grid[i][j];
+        }
+    }
+  }
+    function sideScroll(){
+        sideScrolls = !sideScrolls;
+
+    }
     function mousePressed(){
         /* si on clique sur une case, on change la valeur de la case */
         x = floor(mouseX / mainWidth);
@@ -226,6 +208,8 @@ function setup() {
     function refresh(){
         makeAGrid();
         clignotement = false
+        x2 = 0;
+        y2 = 0;
 
     }
 
